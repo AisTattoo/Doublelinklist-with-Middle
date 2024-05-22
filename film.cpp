@@ -166,6 +166,49 @@ void removeMiddle(int posisi) {
     }
 }
 
+void changeFirst(string data[3]) {
+    if (kepala == NULL) {
+        cout << "Double Linked List belum dibuat!!!";
+    } else {
+        kepala->namaFilm = data[0];
+        kepala->durasi = stoi(data[1]);
+        kepala->harga = stoi(data[2]);
+    }
+}
+
+void changeLast(string data[3]) {
+    if (kepala == NULL) {
+        cout << "Double Linked List belum dibuat!!!";
+    } else {
+        ekor->namaFilm = data[0];
+        ekor->durasi = stoi(data[1]);
+        ekor->harga = stoi(data[2]);
+    }
+}
+
+void changeMiddle(string data[3], int posisi) {
+    if (kepala == NULL) {
+        cout << "Double Linked List belum dibuat!!!";
+    } else {
+        if (posisi == 1 || posisi == countDoubleLinkedList()) {
+            cout << "Posisi bukan posisi tengah!!!" << endl;
+        } else if (posisi < 1 || posisi > countDoubleLinkedList()) {
+            cout << "Posisi diluar jangkauan!!!" << endl;
+        } else {
+            saatIni = kepala;
+            int nomor = 1;
+            while (nomor < posisi - 1) {
+                saatIni = saatIni->lanjut;
+                nomor++;
+            }
+            saatIni->lanjut->namaFilm = data[0];
+            saatIni->lanjut->durasi = stoi(data[1]);
+            saatIni->lanjut->harga = stoi(data[2]);
+        }
+    }
+}
+
+
 // Print Double Linked List
 void printDoubleLinkedList()
 {
@@ -210,8 +253,28 @@ int main() {
 
     printDoubleLinkedList();
 
-    removeMiddle(2);
+    string data5[3] = { "ayam dari timur", "112", "34000"};
+    changeFirst(data5);
 
+    printDoubleLinkedList();
+
+    string data6[3] = { "laptop baru berujung lama", "130", "60000"};
+    changeLast(data6);
+
+    printDoubleLinkedList();
+
+    string data7[3] = { "Tukang bubur naik haji", "140", "65000"};
+    changeMiddle(data7, 2);
+
+    printDoubleLinkedList();
+
+    removeMiddle(3);
+    printDoubleLinkedList();
+
+    removeFirst();
+    printDoubleLinkedList();
+
+    removeLast();
     printDoubleLinkedList();
 
     return 0;
